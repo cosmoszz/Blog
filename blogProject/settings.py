@@ -122,8 +122,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS=(os.path.join(BASE_DIR, 'static'))
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 # 加入下面的配置
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-DEBUG = False
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost ', '.liudu888.com']
+#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+#DEBUG = False
+#ALLOWED_HOSTS = ['127.0.0.1', 'localhost ', '.liudu888.com']
