@@ -18,10 +18,14 @@ from django.conf.urls import url,include
 from django.contrib import admin
 from .settings import STATIC_ROOT
 from django.views.static import serve
+from blog.feeds import AllPostsRssFeed
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'',include('blog.urls')),
     url(r'',include('comments.urls')),
     url(r'^static/(?P<path>.*)/$', serve, {'document_root': STATIC_ROOT}),
+    # 记得在顶部引入 AllPostsRssFeed
+    url(r'^all/rss/$', AllPostsRssFeed(), name='rss'),
 ]

@@ -1,6 +1,8 @@
+import markdown
 from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
+from django.utils.html import strip_tags
 from django.utils.six import python_2_unicode_compatible
 
 # Create your models here.
@@ -57,10 +59,31 @@ class Post(models.Model):
     # 因为我们规定一篇文章只能有一个作者，而一个作者可能会写多篇文章，因此这是一对多的关联关系，和 Category 类似。
     author=models.ForeignKey(User)
 
+    #文章阅读数字
+    views_count=models.PositiveIntegerField(default=0)
     def __str__(self):
         return self.title
     def get_absolute_url(self):
         return reverse('blog:detail',kwargs={'pk':self.pk})
 
+    def increase_views(self):
+        self.views_count+=1
+        self.save(update_fields=['views_count'])
+
+    def save(self, *args, **kwargs):
+        # 如果没有填写摘要
+        if not self.excerpt:
+            # 首先实例化一个 Markdown 类，用于渲染 body 的文本
+            md = markdown.Markdown(extensions=[
+                'markdown.extensions.extra',
+                'markdown.extensions.codehilite',
+            ])
+            # 先将 Markdown 文本渲染成 HTML 文本
+            # strip_tags 去掉 HTML 文本的全部 HTML 标签
+            # 从文本摘取前 54 个字符赋给 excerpt
+            self.excerpt = strip_tags(md.convert(self.body))[:54]
+
+        # 调用父类的 save 方法将数据保存到数据库中
+        super(Post, self).save(*args, **kwargs)
     class Meta:
         ordering=['-createTime',]
