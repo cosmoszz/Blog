@@ -123,10 +123,17 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
-# 加入下面的配置
-#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-#DEBUG = False
-#ALLOWED_HOSTS = ['127.0.0.1', 'localhost ', '.liudu888.com']
+#这里注意不要和你项目static文件夹名一样,因为这个是用来存放收集来的所有静态文件的.
+#如果你设置相同,等运行collectstatic时会警告.
+STATIC_ROOT = os.path.join(BASE_DIR, 'static1')
+
+# 我们的静态文件分开三个部分
+# 这里我们设为三个路径
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'blog/static'),
+    os.path.join(BASE_DIR, 'blog', 'static'),
+    os.path.join(BASE_DIR, 'comments', 'static'),
+    ]
+
+DEBUG = False
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost ', '.liudu888.com']

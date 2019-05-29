@@ -16,9 +16,12 @@ Including another URLconf
 #from django.conf.urls import url
 from django.conf.urls import url,include
 from django.contrib import admin
+from .settings import STATIC_ROOT
+from django.views.static import serve
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'',include('blog.urls')),
-    url(r'',include('comments.urls'))
+    url(r'',include('comments.urls')),
+    url(r'^static/(?P<path>.*)/$', serve, {'document_root': STATIC_ROOT}),
 ]
