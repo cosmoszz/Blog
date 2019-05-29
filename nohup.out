@@ -1,0 +1,11 @@
+[2019-05-29 04:44:34 -0400] [20238] [INFO] Starting gunicorn 19.9.0
+[2019-05-29 04:44:34 -0400] [20238] [INFO] Listening at: http://127.0.0.1:8000 (20238)
+[2019-05-29 04:44:34 -0400] [20238] [INFO] Using worker: sync
+[2019-05-29 04:44:34 -0400] [20241] [INFO] Booting worker with pid: 20241
+[2019-05-29 04:51:08 -0400] [20238] [INFO] Handling signal: term
+[2019-05-29 16:51:08 +0800] [20241] [INFO] Worker exiting (pid: 20241)
+[2019-05-29 04:51:08 -0400] [20238] [INFO] Shutting down: Master
+[2019-05-29 04:52:02 -0400] [20245] [INFO] Starting gunicorn 19.9.0
+[2019-05-29 04:52:02 -0400] [20245] [INFO] Listening at: http://127.0.0.1:8000 (20245)
+[2019-05-29 04:52:02 -0400] [20245] [INFO] Using worker: sync
+[2019-05-29 04:52:02 -0400] [20248] [INFO] Booting worker with pid: 20248
