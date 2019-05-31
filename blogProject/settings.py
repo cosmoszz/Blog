@@ -135,9 +135,11 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'blog/static'),
     os.path.join(BASE_DIR, 'blog', 'static'),
     os.path.join(BASE_DIR, 'comments', 'static'),
-    ]
+    os.path.join(BASE_DIR, 'uploads'),
+]
 
-# DEBUG = False
-# ALLOWED_HOSTS = ['127.0.0.1', 'localhost ', '.liudu888.com']
+DEBUG = False
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost ', '.liudu888.com']
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 MEDIA_URL = '/media/'

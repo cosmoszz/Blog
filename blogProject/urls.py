@@ -31,9 +31,12 @@ urlpatterns = [
     # 记得在顶部引入 AllPostsRssFeed
     url(r'^all/rss/$', AllPostsRssFeed(), name='rss'),
     url(r'mdeditor/', include('mdeditor.urls'))
-]
-if settings.DEBUG:
-    # static files (images, css, javascript, etc.)
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# if settings.DEBUG:
+#     # static files (images, css, javascript, etc.)
+#     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
