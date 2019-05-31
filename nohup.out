@@ -1,11 +1,24 @@
-[2019-05-29 04:44:34 -0400] [20238] [INFO] Starting gunicorn 19.9.0
-[2019-05-29 04:44:34 -0400] [20238] [INFO] Listening at: http://127.0.0.1:8000 (20238)
-[2019-05-29 04:44:34 -0400] [20238] [INFO] Using worker: sync
-[2019-05-29 04:44:34 -0400] [20241] [INFO] Booting worker with pid: 20241
-[2019-05-29 04:51:08 -0400] [20238] [INFO] Handling signal: term
-[2019-05-29 16:51:08 +0800] [20241] [INFO] Worker exiting (pid: 20241)
-[2019-05-29 04:51:08 -0400] [20238] [INFO] Shutting down: Master
-[2019-05-29 04:52:02 -0400] [20245] [INFO] Starting gunicorn 19.9.0
-[2019-05-29 04:52:02 -0400] [20245] [INFO] Listening at: http://127.0.0.1:8000 (20245)
-[2019-05-29 04:52:02 -0400] [20245] [INFO] Using worker: sync
-[2019-05-29 04:52:02 -0400] [20248] [INFO] Booting worker with pid: 20248
+[2019-05-31 04:48:18 -0400] [8534] [INFO] Starting gunicorn 19.9.0
+[2019-05-31 04:48:18 -0400] [8534] [INFO] Listening at: http://127.0.0.1:8000 (8534)
+[2019-05-31 04:48:18 -0400] [8534] [INFO] Using worker: sync
+[2019-05-31 04:48:18 -0400] [8537] [INFO] Booting worker with pid: 8537
+[2019-05-31 04:48:18 -0400] [8537] [ERROR] Exception in worker process
+Traceback (most recent call last):
+  File "/home/ziyuewanfeng/sites/blog/blogProjectEnv/lib/python3.6/site-packages/gunicorn/arbiter.py", line 583, in spawn_worker
+    worker.init_process()
+  File "/home/ziyuewanfeng/sites/blog/blogProjectEnv/lib/python3.6/site-packages/gunicorn/workers/base.py", line 129, in init_process
+    self.load_wsgi()
+  File "/home/ziyuewanfeng/sites/blog/blogProjectEnv/lib/python3.6/site-packages/gunicorn/workers/base.py", line 138, in load_wsgi
+    self.wsgi = self.app.wsgi()
+  File "/home/ziyuewanfeng/sites/blog/blogProjectEnv/lib/python3.6/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/home/ziyuewanfeng/sites/blog/blogProjectEnv/lib/python3.6/site-packages/gunicorn/app/wsgiapp.py", line 52, in load
+    return self.load_wsgiapp()
+  File "/home/ziyuewanfeng/sites/blog/blogProjectEnv/lib/python3.6/site-packages/gunicorn/app/wsgiapp.py", line 41, in load_wsgiapp
+    return util.import_app(self.app_uri)
+  File "/home/ziyuewanfeng/sites/blog/blogProjectEnv/lib/python3.6/site-packages/gunicorn/util.py", line 350, in import_app
+    __import__(module)
+ModuleNotFoundError: No module named 'mypoject'
+[2019-05-31 04:48:18 -0400] [8537] [INFO] Worker exiting (pid: 8537)
+[2019-05-31 04:48:18 -0400] [8534] [INFO] Shutting down: Master
+[2019-05-31 04:48:18 -0400] [8534] [INFO] Reason: Worker failed to boot.

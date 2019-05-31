@@ -1,0 +1,5 @@
+nohup: ignoring input
+[2019-05-31 04:58:08 -0400] [8548] [INFO] Starting gunicorn 19.9.0
+[2019-05-31 04:58:08 -0400] [8548] [INFO] Listening at: http://127.0.0.1:8000 (8548)
+[2019-05-31 04:58:08 -0400] [8548] [INFO] Using worker: sync
+[2019-05-31 04:58:08 -0400] [8551] [INFO] Booting worker with pid: 8551
