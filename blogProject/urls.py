@@ -14,7 +14,9 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 #from django.conf.urls import url
+from django.conf import settings
 from django.conf.urls import url,include
+from django.conf.urls.static import static
 from django.contrib import admin
 from .settings import STATIC_ROOT
 from django.views.static import serve
@@ -28,4 +30,10 @@ urlpatterns = [
     url(r'^static/(?P<path>.*)/$', serve, {'document_root': STATIC_ROOT}),
     # 记得在顶部引入 AllPostsRssFeed
     url(r'^all/rss/$', AllPostsRssFeed(), name='rss'),
+    url(r'mdeditor/', include('mdeditor.urls'))
 ]
+if settings.DEBUG:
+    # static files (images, css, javascript, etc.)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+

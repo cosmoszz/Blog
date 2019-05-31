@@ -2,12 +2,16 @@ import markdown
 from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
+from django.utils.encoding import force_text
 from django.utils.html import strip_tags
 from django.utils.six import python_2_unicode_compatible
 
 # Create your models here.
 
 #分类
+from mdeditor.fields import MDTextField
+
+
 class Category(models.Model):
     """
         Django 要求模型必须继承 models.Model 类。
@@ -33,7 +37,8 @@ class Post(models.Model):
     #标题
     title=models.CharField(max_length=100)
     #正文
-    boby=models.TextField()
+    #boby=models.TextField()
+    boby=MDTextField()
 
     createTime=models.DateTimeField()
     modifiedTime=models.DateTimeField()
@@ -71,6 +76,7 @@ class Post(models.Model):
         self.save(update_fields=['views_count'])
 
     def save(self, *args, **kwargs):
+
         # 如果没有填写摘要
         if not self.excerpt:
             # 首先实例化一个 Markdown 类，用于渲染 body 的文本
@@ -81,8 +87,16 @@ class Post(models.Model):
             # 先将 Markdown 文本渲染成 HTML 文本
             # strip_tags 去掉 HTML 文本的全部 HTML 标签
             # 从文本摘取前 54 个字符赋给 excerpt
-            self.excerpt = strip_tags(md.convert(self.body))[:54]
+            #content_temp=Post.objects.all().get(pk=self.pk).boby
 
+
+            # content_temp=[]
+            # content_temp.append(self.boby)
+            # self.excerpt = strip_tags(md.convert(content_temp[0][:54]))
+            test_temp = models.TextField()
+            test_temp=self.boby
+            self.boby=test_temp
+            self.excerpt = strip_tags(md.convert(self.boby))[:54]
         # 调用父类的 save 方法将数据保存到数据库中
         super(Post, self).save(*args, **kwargs)
     class Meta:

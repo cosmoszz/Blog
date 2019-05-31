@@ -1,6 +1,6 @@
 from django.shortcuts import render,get_object_or_404
 from django.http import HttpResponse
-from .models import Post,Category
+from .models import Post, Category, Tag
 import markdown
 from comments.forms import CommentForm
 from django.views.generic import ListView,DetailView
@@ -33,12 +33,20 @@ def detail(request,pk):
     post=get_object_or_404(Post,pk=pk)
 
     post.increase_views()
-    post.boby=markdown.markdown(post.boby,
-                                extensions=[
-                                    'markdown.extensions.extra',
-                                    'markdown.extensions.codehilite',
-                                    'markdown.extensions.toc',
-                                ])
+    # post.boby=markdown.markdown(post.boby.replace('\r\n',' \n'),
+    #                             extensions=[
+    #                                 'markdown.extensions.extra',
+    #                                 'markdown.extensions.codehilite',
+    #                                 'markdown.extensions.toc',
+    #                                 TocExtension(slugify=slugify),
+    #                             ])
+    md = markdown.Markdown(extensions=[
+        'markdown.extensions.extra',
+        'markdown.extensions.codehilite',
+        TocExtension(slugify=slugify),
+    ])
+    post.boby=md.convert(post.boby)
+    post.toc=md.toc
     form =CommentForm()
 
     comment_list=post.comment_set.all()
@@ -231,26 +239,24 @@ class PostDetailView(DetailView):
         return  response
     def get_object(self, queryset=None):
         # 覆写 get_object 方法的目的是因为需要对 post 的 body 值进行渲染
-        # post=super(PostDetailView, self).get_object(queryset=None)
-        # post.body = markdown.markdown(post.body,
-        #                               extensions=[
-        #                                   'markdown.extensions.extra',
-        #                                   'markdown.extensions.codehilite',
-        #                                   'markdown.extensions.toc',
-        #                               ])
-        # return post
+        post=super(PostDetailView, self).get_object(queryset=None)
+        post.body = markdown.markdown(post.body,
+                                      extensions=[
+                                          'markdown.extensions.extra',
+                                          'markdown.extensions.codehilite',
+                                          'markdown.extensions.toc',
+                                      ])
+        return post
         post = super(PostDetailView, self).get_object(queryset=None)
+        post_content = get_object_or_404(Post, pk=post.pk)
         md = markdown.Markdown(extensions=[
             'markdown.extensions.extra',
             'markdown.extensions.codehilite',
-            'markdown.extensions.toc',
-            # 记得在顶部引入 TocExtension 和 slugify
             TocExtension(slugify=slugify),
         ])
-
-        post.body = md.convert(post.body)
-        post.toc = md.toc
-        return post
+        post_content.body = md.convert(post_content.body)
+        post_content.toc = md.toc
+        return post_content
     def get_context_data(self, **kwargs):
         # 覆写 get_context_data 的目的是因为除了将 post 传递给模板外（DetailView 已经帮我们完成），
         # 还要把评论表单、post 下的评论列表传递给模板。
