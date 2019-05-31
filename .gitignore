@@ -5,7 +5,7 @@ __pycache__/
 *.log
 *.out
 *.sqlite3
-
+.idea/workspace.xml
 # C extensions
 *.so
 
