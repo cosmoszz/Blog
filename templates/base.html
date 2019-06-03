@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Black &amp; White</title>
+    <title>六度轮回只为你博客</title>
 
     <!-- meta -->
     <meta charset="UTF-8">
@@ -28,7 +28,7 @@
         <div class="row">
             <div class="col-md-4 col-sm-5 col-xs-8">
                 <div class="logo">
-                    <h1><a href="{% url 'blog:index' %}"><b>Black</b> &amp; White</a></h1>
+                    <h1><a href="{% url 'blog:index' %}">六度轮回只为你</a></h1>
                 </div>
             </div><!-- col-md-4 -->
             <div class="col-md-8 col-sm-7 col-xs-4">
@@ -67,13 +67,16 @@
 <div class="content-body">
     <div class="container">
         <div class="row">
+            <aside class="col-md-2" style="margin-left: -2%;">
+                {% block toc %}
+                {% endblock toc %}
+            </aside>
             <main class="col-md-8">
                {% block main %}
                 {% endblock main %}
             </main>
-            <aside class="col-md-4">
-                {% block toc %}
-                {% endblock toc %}
+            <aside class="col-md-2">
+
                 <div class="widget widget-recent-posts">
                     <h3 class="widget-title">最新文章</h3>
                     {% get_recent_posts as recent_post_list %}
@@ -141,9 +144,13 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <p class="copyright">&copy 2017 - 采集自<a href="http://www.cssmoban.com/"
-                                                        target="_blank" title="模板之家">模板之家</a>
-                    - 由<a href="http://zmrenwu.com/" title="网页模板" target="_blank">追梦人物的博客</a>修改
+{#                <p class="copyright">&copy 2017 - 采集自<a href="http://www.cssmoban.com/"#}
+{#                                                        target="_blank" title="模板之家">模板之家</a>#}
+{#                    - 由<a href="http://zmrenwu.com/" title="网页模板" target="_blank">追梦人物的博客</a>修改#}
+{#                </p>#}
+                <p class="copyright">
+                    <a href="{% url 'blog:index' %}" title="博客" target="_blank">六度轮回只为你博客</a>
+
                 </p>
             </div>
         </div>
@@ -155,10 +162,10 @@
     <button type="button" class="overlay-close"><span class="ion-ios-close-empty"></span></button>
     <nav>
         <ul>
-            <li><a href="index.html">首页</a></li>
-            <li><a href="full-width.html">博客</a></li>
-            <li><a href="about.html">关于</a></li>
-            <li><a href="contact.html">联系</a></li>
+            <li><a href="{% url 'blog:index' %}">首页</a></li>
+            <li><a href="{% url 'blog:index' %}">博客</a></li>
+            <li><a href="{% url 'blog:index' %}">关于</a></li>
+            <li><a href="{% url 'blog:index' %}">联系</a></li>
         </ul>
     </nav>
 </div>

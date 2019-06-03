@@ -24,7 +24,7 @@ from blog.feeds import AllPostsRssFeed
 
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
+    url(r'^rootAdminZiyue/', admin.site.urls),
     url(r'',include('blog.urls')),
     url(r'',include('comments.urls')),
     url(r'^static/(?P<path>.*)/$', serve, {'document_root': STATIC_ROOT}),

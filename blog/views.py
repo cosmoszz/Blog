@@ -43,10 +43,13 @@ def detail(request,pk):
     md = markdown.Markdown(extensions=[
         'markdown.extensions.extra',
         'markdown.extensions.codehilite',
+        'markdown.extensions.toc',
         TocExtension(slugify=slugify),
     ])
     post.boby=md.convert(post.boby)
     post.toc=md.toc
+
+
     form =CommentForm()
 
     comment_list=post.comment_set.all()
